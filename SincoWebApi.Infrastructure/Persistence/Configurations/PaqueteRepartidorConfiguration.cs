@@ -8,7 +8,7 @@ public sealed class PaqueteRepartidorConfiguration : IEntityTypeConfiguration<Pa
 {
     public void Configure(EntityTypeBuilder<PaqueteRepartidor> builder)
     {
-        builder.ToTable("PaqueteRepartidor");
+        builder.ToTable("tblPaqueteRepartidor");
         builder.HasKey(x => x.PaqueteRepartidorId);
 
         builder.Property(x => x.PaqueteRepartidorId)

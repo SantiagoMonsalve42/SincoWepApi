@@ -79,7 +79,7 @@ namespace SincoWebApi.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PaqueteRepartidor",
+                name: "tblPaqueteRepartidor",
                 columns: table => new
                 {
                     PaqueteRepartidorId = table.Column<int>(type: "int", nullable: false)
@@ -89,15 +89,15 @@ namespace SincoWebApi.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PaqueteRepartidor", x => x.PaqueteRepartidorId);
+                    table.PrimaryKey("PK_tblPaqueteRepartidor", x => x.PaqueteRepartidorId);
                     table.ForeignKey(
-                        name: "FK_PaqueteRepartidor_tblPaquete_PaqueteId",
+                        name: "FK_tblPaqueteRepartidor_tblPaquete_PaqueteId",
                         column: x => x.PaqueteId,
                         principalTable: "tblPaquete",
                         principalColumn: "PaqueteId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PaqueteRepartidor_tblRepartidor_RepartidorId",
+                        name: "FK_tblPaqueteRepartidor_tblRepartidor_RepartidorId",
                         column: x => x.RepartidorId,
                         principalTable: "tblRepartidor",
                         principalColumn: "RepartidorId",
@@ -137,13 +137,13 @@ namespace SincoWebApi.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PaqueteRepartidor_PaqueteId",
-                table: "PaqueteRepartidor",
+                name: "IX_tblPaqueteRepartidor_PaqueteId",
+                table: "tblPaqueteRepartidor",
                 column: "PaqueteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PaqueteRepartidor_RepartidorId",
-                table: "PaqueteRepartidor",
+                table: "tblPaqueteRepartidor",
                 column: "RepartidorId");
 
             migrationBuilder.CreateIndex(
@@ -161,7 +161,7 @@ namespace SincoWebApi.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PaqueteRepartidor");
+                name: "tblPaqueteRepartidor");
 
             migrationBuilder.DropTable(
                 name: "tblPaquete");

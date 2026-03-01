@@ -109,7 +109,7 @@ namespace SincoWebApi.Infrastructure.Migrations
 
                     b.HasIndex("RepartidorId");
 
-                    b.ToTable("PaqueteRepartidor", (string)null);
+                    b.ToTable("tblPaqueteRepartidor", (string)null);
                 });
 
             modelBuilder.Entity("SincoWebApi.Domain.Entities.Prioridad", b =>
