@@ -30,7 +30,7 @@ public sealed class PaqueteRepository : Repository<Paquete>, IPaqueteRepository
             query = query.Where(paquete => paquete.EstadoId == estadoId.Value);
         }
 
-        return await query.ToListAsync(cancellationToken);
+        return await query.OrderByDescending(x=> x.PaqueteId).ToListAsync(cancellationToken);
     }
 
     public async Task<Paquete?> GetByIdWithDetailsAsync(int paqueteId, CancellationToken cancellationToken)
