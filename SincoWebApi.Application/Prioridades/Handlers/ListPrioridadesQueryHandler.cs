@@ -1,18 +1,20 @@
+using MediatR;
 using SincoWebApi.Application.Dtos;
+using SincoWebApi.Application.Prioridades.Queries;
 using SincoWebApi.Domain.Interfaces;
 
-namespace SincoWebApi.Application.Services;
+namespace SincoWebApi.Application.Prioridades.Handlers;
 
-public sealed class PrioridadService : IPrioridadService
+public sealed class ListPrioridadesQueryHandler : IRequestHandler<ListPrioridadesQuery, IReadOnlyList<PrioridadResponse>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public PrioridadService(IUnitOfWork unitOfWork)
+    public ListPrioridadesQueryHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IReadOnlyList<PrioridadResponse>> ListAsync(CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<PrioridadResponse>> Handle(ListPrioridadesQuery request, CancellationToken cancellationToken)
     {
         var prioridades = await _unitOfWork.Prioridades.ListAsync(cancellationToken);
 

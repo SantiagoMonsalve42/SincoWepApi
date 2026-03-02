@@ -1,6 +1,7 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SincoWebApi.Application.Dtos;
-using SincoWebApi.Application.Services;
+using SincoWebApi.Application.Prioridades.Queries;
 
 namespace SincoWepApi.Controllers;
 
@@ -8,17 +9,17 @@ namespace SincoWepApi.Controllers;
 [Route("api/prioridades")]
 public sealed class PrioridadesController : ControllerBase
 {
-    private readonly IPrioridadService _prioridadService;
+    private readonly IMediator _mediator;
 
-    public PrioridadesController(IPrioridadService prioridadService)
+    public PrioridadesController(IMediator mediator)
     {
-        _prioridadService = prioridadService;
+        _mediator = mediator;
     }
 
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<PrioridadResponse>>> Get(CancellationToken cancellationToken)
     {
-        var prioridades = await _prioridadService.ListAsync(cancellationToken);
+        var prioridades = await _mediator.Send(new ListPrioridadesQuery(), cancellationToken);
         return Ok(prioridades);
     }
 }

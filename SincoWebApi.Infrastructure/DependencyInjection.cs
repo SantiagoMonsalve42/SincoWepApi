@@ -5,6 +5,7 @@ using SincoWebApi.Domain.Interfaces;
 using SincoWebApi.Domain.Interfaces.Repositories;
 using SincoWebApi.Infrastructure.Persistence;
 using SincoWebApi.Infrastructure.Repositories;
+using SincoWebApi.Infrastructure.Services;
 
 namespace SincoWebApi.Infrastructure;
 
@@ -23,6 +24,7 @@ public static class DependencyInjection
         services.AddScoped<IEstadoPaqueteRepository, EstadoPaqueteRepository>();
         services.AddScoped<IPrioridadRepository, PrioridadRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<ICodigoSeguimientoGenerator, CodigoSeguimientoGenerator>();
 
         return services;
     }

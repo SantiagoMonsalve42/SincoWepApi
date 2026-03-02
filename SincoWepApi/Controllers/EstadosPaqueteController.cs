@@ -1,6 +1,7 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SincoWebApi.Application.Dtos;
-using SincoWebApi.Application.Services;
+using SincoWebApi.Application.EstadosPaquete.Queries;
 
 namespace SincoWepApi.Controllers;
 
@@ -8,17 +9,17 @@ namespace SincoWepApi.Controllers;
 [Route("api/estados-paquete")]
 public sealed class EstadosPaqueteController : ControllerBase
 {
-    private readonly IEstadoPaqueteService _estadoPaqueteService;
+    private readonly IMediator _mediator;
 
-    public EstadosPaqueteController(IEstadoPaqueteService estadoPaqueteService)
+    public EstadosPaqueteController(IMediator mediator)
     {
-        _estadoPaqueteService = estadoPaqueteService;
+        _mediator = mediator;
     }
 
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<EstadoPaqueteResponse>>> Get(CancellationToken cancellationToken)
     {
-        var estados = await _estadoPaqueteService.ListAsync(cancellationToken);
+        var estados = await _mediator.Send(new ListEstadosPaqueteQuery(), cancellationToken);
         return Ok(estados);
     }
 }

@@ -1,18 +1,20 @@
+using MediatR;
 using SincoWebApi.Application.Dtos;
+using SincoWebApi.Application.EstadosPaquete.Queries;
 using SincoWebApi.Domain.Interfaces;
 
-namespace SincoWebApi.Application.Services;
+namespace SincoWebApi.Application.EstadosPaquete.Handlers;
 
-public sealed class EstadoPaqueteService : IEstadoPaqueteService
+public sealed class ListEstadosPaqueteQueryHandler : IRequestHandler<ListEstadosPaqueteQuery, IReadOnlyList<EstadoPaqueteResponse>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public EstadoPaqueteService(IUnitOfWork unitOfWork)
+    public ListEstadosPaqueteQueryHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IReadOnlyList<EstadoPaqueteResponse>> ListAsync(CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<EstadoPaqueteResponse>> Handle(ListEstadosPaqueteQuery request, CancellationToken cancellationToken)
     {
         var estados = await _unitOfWork.EstadosPaquete.ListAsync(cancellationToken);
 

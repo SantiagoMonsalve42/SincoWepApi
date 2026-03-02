@@ -1,18 +1,20 @@
+using MediatR;
 using SincoWebApi.Application.Dtos;
+using SincoWebApi.Application.Repartidores.Queries;
 using SincoWebApi.Domain.Interfaces;
 
-namespace SincoWebApi.Application.Services;
+namespace SincoWebApi.Application.Repartidores.Handlers;
 
-public sealed class RepartidorService : IRepartidorService
+public sealed class ListRepartidoresQueryHandler : IRequestHandler<ListRepartidoresQuery, IReadOnlyList<RepartidorResponse>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
-    public RepartidorService(IUnitOfWork unitOfWork)
+    public ListRepartidoresQueryHandler(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IReadOnlyList<RepartidorResponse>> ListAsync(CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<RepartidorResponse>> Handle(ListRepartidoresQuery request, CancellationToken cancellationToken)
     {
         var repartidores = await _unitOfWork.Repartidores.ListAsync(cancellationToken);
 

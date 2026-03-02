@@ -1,6 +1,7 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SincoWebApi.Application.Dtos;
-using SincoWebApi.Application.Services;
+using SincoWebApi.Application.Repartidores.Queries;
 
 namespace SincoWepApi.Controllers;
 
@@ -8,17 +9,17 @@ namespace SincoWepApi.Controllers;
 [Route("api/repartidores")]
 public sealed class RepartidoresController : ControllerBase
 {
-    private readonly IRepartidorService _repartidorService;
+    private readonly IMediator _mediator;
 
-    public RepartidoresController(IRepartidorService repartidorService)
+    public RepartidoresController(IMediator mediator)
     {
-        _repartidorService = repartidorService;
+        _mediator = mediator;
     }
 
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<RepartidorResponse>>> Get(CancellationToken cancellationToken)
     {
-        var repartidores = await _repartidorService.ListAsync(cancellationToken);
+        var repartidores = await _mediator.Send(new ListRepartidoresQuery(), cancellationToken);
         return Ok(repartidores);
     }
 }
