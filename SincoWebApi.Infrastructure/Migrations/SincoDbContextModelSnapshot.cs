@@ -75,7 +75,7 @@ namespace SincoWebApi.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Peso")
-                        .HasColumnType("decimal(4,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("PrioridadId")
                         .HasColumnType("int");

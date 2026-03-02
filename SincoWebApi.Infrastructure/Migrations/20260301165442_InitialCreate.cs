@@ -56,7 +56,7 @@ namespace SincoWebApi.Infrastructure.Migrations
                     PaqueteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Peso = table.Column<decimal>(type: "decimal(4,2)", nullable: false),
+                    Peso = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CodigoSeguimiento = table.Column<string>(type: "varchar(250)", unicode: false, maxLength: 250, nullable: false),
                     PrioridadId = table.Column<int>(type: "int", nullable: false),
                     EstadoId = table.Column<int>(type: "int", nullable: false)

@@ -19,7 +19,7 @@ public sealed class PaqueteConfiguration : IEntityTypeConfiguration<Paquete>
             .IsRequired();
 
         builder.Property(x => x.Peso)
-            .HasColumnType("decimal(4,2)")
+            .HasColumnType("decimal(18,2)")
             .IsRequired();
 
         builder.Property(x => x.CodigoSeguimiento)

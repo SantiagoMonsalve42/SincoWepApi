@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SincoWebApi.Domain.Interfaces;
+using SincoWebApi.Domain.Interfaces.Repositories;
 using SincoWebApi.Infrastructure.Persistence;
+using SincoWebApi.Infrastructure.Repositories;
 
 namespace SincoWebApi.Infrastructure;
 
@@ -13,6 +16,13 @@ public static class DependencyInjection
             options.UseSqlServer(
                 configuration.GetConnectionString("DefaultConnection"),
                 sql => sql.MigrationsAssembly(typeof(SincoDbContext).Assembly.FullName)));
+
+        services.AddScoped<IPaqueteRepository, PaqueteRepository>();
+        services.AddScoped<IRepartidorRepository, RepartidorRepository>();
+        services.AddScoped<IPaqueteRepartidorRepository, PaqueteRepartidorRepository>();
+        services.AddScoped<IEstadoPaqueteRepository, EstadoPaqueteRepository>();
+        services.AddScoped<IPrioridadRepository, PrioridadRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
